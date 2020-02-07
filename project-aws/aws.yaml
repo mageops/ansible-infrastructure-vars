@@ -1,0 +1,142 @@
+##################################################################
+# Amazon AWS-specific settings shall be placed in this file.     #
+#                                                                #
+# NOTE: Commented-out variables are the defaults. Uncomment them #
+# when you need to override the default settings!                #
+##################################################################
+
+# ---------------------------
+# --------  General  --------
+# ---------------------------
+
+# aws_use: no
+# aws_region: eu-central-1
+# aws_preferred_availability_zone:                                              # optional - selected automatically (the first zone in region)
+aws_account_id:                                                                 # required
+
+
+# -----------------------
+# --------  VPC  --------
+# -----------------------
+
+# aws_vpc_name: "{{ mageops_app_name }}"
+# aws_vpc_routes_extra: []
+aws_vpc_subnet_prefix:                                                          # required - first two elements of subnet as dot-separated numbers - e.g. '192.168'
+
+# -----------------------
+# --------  EC2  --------
+# -----------------------
+
+# aws_ec2_ssh_key_name: "{{ mageops_app_name }}"                                # name of the manually created AWS EC2 SSH key                                     
+
+
+# ----------------------------------
+# --------  EC2 / App Node  --------
+# ----------------------------------
+
+# aws_app_node_instance_type: t3a.micro
+# aws_app_node_ebs_volume_size: 10
+
+
+# -----------------------------------------
+# --------  EC2 / Persistent Node  --------
+# -----------------------------------------
+
+# aws_persistent_node_create: yes
+# aws_persistent_node_instance_type: t3a.micro 
+# aws_persistent_node_ebs_volume_size: 10                                       # volume size in GB
+
+# aws_persistent_node_elastic_ip: ~                                             # if set then the chosen EIP will be assigned (it has to already exist!)
+
+
+# ---------------------------------------------------
+# --------  EC2 / Varnish Loadbalancer Node  --------
+# ---------------------------------------------------
+
+# aws_varnish_node_instance_type: t3a.micro
+# aws_varnish_node_ebs_volume_size: 10                                          # volume size in GB
+# aws_varnish_node_elastic_ip: ~                                                # if set then the chosen EIP will be assigned (it has to already exist!)
+
+
+# -----------------------
+# --------  RDS  --------
+# -----------------------
+
+# aws_rds_create: "{{ mageops_mysql_create and aws_use }}"
+# aws_rds_instance_type: db.t3a.micro
+# aws_rds_storage_size: 10
+
+
+# -----------------------
+# --------  ASG  --------
+# -----------------------
+
+# aws_app_asg_availability_zones: ["{{ aws_preferred_availability_zone }}"]
+# aws_app_asg_min_size: '1'
+# aws_app_asg_max_size: '3'
+# aws_app_asg_desired_capacity: '1'
+# aws_app_asg_load_balancers: []
+
+# aws_extra_app_asg_enable: no                                                  # enable extra app instances ASG
+# aws_extra_app_asg_min_size: 0
+# aws_extra_app_asg_max_size: 1
+# aws_extra_app_asg_desired_capacity: 0
+# aws_extra_app_asg_cooldown: 60
+
+# aws_extra_app_asg_passthrough_url_pattern:                                    # regexp patterns for extra app instance passhtrough
+# aws_extra_app_asg_passthrough_uagent_pattern:
+# aws_extra_app_asg_passthrough_ip_pattern:
+
+
+# -----------------------------------------
+# --------  Elastic Load Balancer  --------
+# -----------------------------------------
+
+# aws_elb_create: no
+# aws_elb_https_certificate_arn: ~
+
+# ------------------------------
+# --------  Cloudfront  --------
+# ------------------------------
+
+# aws_cloudfront_distribution_create: yes
+# aws_cloudfront_domain_aliases: []
+# aws_cloudfront_optimizing_edge_lambda_enable: yes
+
+
+# ----------------------
+# --------  S3  --------
+# ----------------------
+
+# magento_s3fs_buckets_extra: []
+
+# aws_s3_secret_bucket: "{{ mageops_app_name }}-secret"
+# aws_s3_media_bucket: "{{ mageops_app_name }}-media"
+
+
+# ----------------------------------------------
+# --------  EFS / Shared Mounts / SFTP  --------
+# ----------------------------------------------
+
+# magento_sftp_efs_mounts: []
+# magento_efs_app_node_mounts: []
+
+
+# ----------------------------------------------
+# --------  Monitoring & Notifications  --------
+# ----------------------------------------------
+
+# aws_logs_slack_notifications: yes
+# aws_logs_slack_hook_url: ~                                                    # required - if enabled
+# aws_logs_slack_channel: "{{ mageops_notifications_slack_channel }}"
+
+# aws_logs_loggers_app_extra: []
+# aws_logs_loggers_persistent_extra: []
+# aws_logs_loggers_varnish_extra: []
+
+
+# -----------------------
+# --------  IAM  --------
+# -----------------------
+
+# aws_iam_name_prefix: MageOps                                                  # you shall almost never change it ;)
