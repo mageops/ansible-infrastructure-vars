@@ -64,6 +64,8 @@ magento_bounce_email_address: contact@magesuite.io                              
 # magento_cron_request_php_memory_limit: "{{ php_http_request_memory_limit }}"  # custom PHP limits for Magento http cron request trigger
 # magento_cron_request_php_max_execution_time: "{{ php_http_request_max_execution_time }}"
 
+magento_media_storage_strategy: aws-efs                                         # how to store and share Magento runtime asset / media files (possible values: aws-s3, aws-efs, local-fs)
+
 # -----------------------------------------------
 # --------  Magento Installation Config  --------
 # -----------------------------------------------
