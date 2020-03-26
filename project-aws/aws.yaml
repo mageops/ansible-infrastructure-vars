@@ -9,8 +9,9 @@
 # --------  General  --------
 # ---------------------------
 
-# aws_use: no
-# aws_region: eu-central-1
+aws_use: yes
+aws_region: eu-central-1
+
 # aws_preferred_availability_zone:                                              # optional - selected automatically (the first zone in region)
 aws_account_id:                                                                 # required
 
@@ -125,10 +126,6 @@ aws_vpc_subnet_prefix:                                                          
 # ----------------------------------------------
 # --------  Monitoring & Notifications  --------
 # ----------------------------------------------
-
-# aws_logs_slack_notifications: yes
-# aws_logs_slack_hook_url: ~                                                    # required - if enabled
-# aws_logs_slack_channel: "{{ mageops_notifications_slack_channel }}"
 
 # aws_logs_loggers_app_extra: []
 # aws_logs_loggers_persistent_extra: []

@@ -27,8 +27,9 @@ mageops_environment: prod                                                       
 # mageops_app_is_magesuite: yes                                                 # is the shop MageSuite-base
 # mageops_install_development_tools: yes                                        # install debugging tools (Blackfire, ...)
 
+# mageops_notifications_slack_enable: yes                                       # whether to enable slack notifications globally
 # mageops_notifications_slack_channel: "#mage-errors"                           # slack channel for error notifications
-# mageops_notifications_slack_hook_url:                                         # slack hook url for notifications
+# mageops_notifications_slack_hook_url:                                         # slack hook url for notifications, usually you'll set this in company-wide globals
 
 # mageops_timezone: Europe/Berlin                                               # timezone (system, php, ...)
 
@@ -79,9 +80,10 @@ magento_media_storage_strategy: aws-efs                                         
 # ----------------------------------------
 
 # magento_admin_path: mgsadmin                                                  # url path used under which the admin panel will be accessible
-# magento_admin_user_username: haarshopadmin                                    # default admin username
+# magento_admin_user_username: mgsadmin                                         # default admin username
 # magento_admin_user_email: contact@creativeshop.io                             # default admin user email
-
+# magento_admin_user_firstname: MageOps
+# magento_admin_user_lastname: DefaultAdmin
 
 # ------------------------------------
 # --------  Magento / Import  --------
@@ -111,6 +113,7 @@ magento_media_storage_strategy: aws-efs                                         
 # deploy_rsync_excludes:                                                        # directories to exclude from when uploading artificts to speed it up
 #   - "/vendor/creativestyle/theme-*"
 
+# deploy_shared_dirs_extra: []                                                  # custom directories shared between releases
 
 # ---------------------------------
 # --------  Magento / SCD  --------
@@ -191,6 +194,8 @@ magento_media_storage_strategy: aws-efs                                         
 # varnish_as_loadbalancer: "{{ varnish_standalone and mageops_https_termination_enable }}"  # use the separate varnish instance as a load-balancer
 # varnish_memory: 128M
 
+# varnish_error_page_color_primary: '#35ABDF'                                   # customize error pages served directly from varnish when backends are not accesible
+
 # varnish_throttling: no                                                        # enable varnish-level request throttling (rate-limiting) mechanism
 # varnish_throttling_rules: []                                                  # varnish throttling rules (see cs.varnish role default for specifics)
 
@@ -203,10 +208,12 @@ magento_media_storage_strategy: aws-efs                                         
 # nginx_mage_run_code_map: {}                                                   # mapping hostname => store/website code.
 # nginx_mage_default_run_code: ~                                                # which code to use when no host matches
 
+# nginx_magento_vhost_template_custom: ~                                        # override default vhost template with custom one - path relative to `templates/` subdir [advanced!]
+# nginx_magento_fastci_params_extra: ~                                          # extra contents to add to nginx fcgi backend params config [advanced!]
+
 # nginx_custom_php_scripts_path_pattern: no                                     # nginx path match pattern for extra php scripts that shall be executable via http request (whitelist)
 # nginx_blacklist_urls_project: []                                              # project-specific URL path patterns to blacklist
 # nginx_blacklist_urls_response_code: 410                                       # response code for blacklisted URLs
-
 
 # -----------------------
 # --------  PHP  --------
@@ -242,7 +249,7 @@ https_termination_hosts:
     aliases: []
   # - name: custom                                                              # optionally use custom certificates placed in `certs/`
   #   server_name: "{{ mageops_magesuite_domain }}"
-  #   cert_path: custom.cer
+  #   cert_path: custom.cer                                                     # cert paths are relative to `certs/` subdir
   #   cert_key_path: custom.key
   #   cert_chain_path: intermediate.cer
   #   aliases: []
