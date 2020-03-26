@@ -14,74 +14,120 @@
 # --------------------------------
 
 
-mageops_project: magesuite                                                      # project name identifier
-mageops_environment: prod                                                       # environment stage name, usually dev or prod
+# > project name identifier
+mageops_project: magesuite    
 
-# mageops_app_id: "{{ mageops_project }}_{{ mageops_environment }}"             # identifiers for naming resources - never change them after env is set up!
+# > environment stage name, usually dev or prod
+mageops_environment: prod                                                      
+
+# > identifiers for naming resources - never change them after env is set up!
+# mageops_app_id: "{{ mageops_project }}_{{ mageops_environment }}"            
 # mageops_app_id_short: "{{ mageops_project | truncate(10, true, '') }}_{{ mageops_environment | truncate(5, true, '') }}"
 # mageops_app_name: "{{ mageops_prefix }}-{{ mageops_project }}-{{ mageops_environment }}"
 
-# mageops_https_enable: yes                                                     # shall https be enabled?
-# mageops_secure_site: no                                                       # shall the site be basic-auth protected
+# > shall https be enabled?
+# mageops_https_enable: yes   
 
-# mageops_app_is_magesuite: yes                                                 # is the shop MageSuite-base
-# mageops_install_development_tools: yes                                        # install debugging tools (Blackfire, ...)
+# > shall the site be basic-auth protected
+# mageops_secure_site: no                                                      
 
-# mageops_notifications_slack_enable: yes                                       # whether to enable slack notifications globally
-# mageops_notifications_slack_channel: "#mage-errors"                           # slack channel for error notifications
-# mageops_notifications_slack_hook_url:                                         # slack hook url for notifications, usually you'll set this in company-wide globals
+# > is the shop MageSuite-base
+# mageops_app_is_magesuite: yes      
 
-# mageops_timezone: Europe/Berlin                                               # timezone (system, php, ...)
+# > install debugging tools (Blackfire, ...)
+# mageops_install_development_tools: yes                                       
+
+# > whether to enable slack notifications globally
+# mageops_notifications_slack_enable: yes                                      
+
+# > slack channel for error notifications
+# mageops_notifications_slack_channel: "#mage-errors"                           
+
+# > slack hook url for notifications, usually you'll set this in company-wide globals
+# mageops_notifications_slack_hook_url:                                        
+
+# > timezone (system, php, ...)
+# mageops_timezone: Europe/Berlin                                              
 
 # --------------------------------------------------------------------------
 # --------  Env config helper variables (not used in provisioning)  --------
 # --------------------------------------------------------------------------
 
-mageops_magesuite_domain: demo.magesuite.io                                     # just a helper used across project configuration
+# > just a helper used across project configuration
+mageops_magesuite_domain: demo.magesuite.io                                    
 
 
 # -------------------------------------------------
 # --------  Magento Infrastructure Config  --------
 # -------------------------------------------------
 
-magento_version: "2.3"                                                          # Magento version
-magento_base_url: "https://{{ mageops_magesuite_domain }}/"                     # main site URL, further website can be configured separately, this one is also used as CDN origin among others
-magento_bounce_email_address: contact@magesuite.io                              # the address set as default shop's email and also used ans the envelope FROM address when sending e-mails
+# > Magento version
+magento_version: "2.3"                                                         
 
-# magento_redis_cache: yes                                                      # use redis as Magento cache backend
-# magento_rabbitmq_queue: no                                                    # configure Magento for rabbitmq queue connection
-# magento_consumer_workers_enable: no                                           # enable cosumer workers ran by supervisord
+# > main site URL, further website can be configured separately, this one is also used as CDN origin among others
+magento_base_url: "https://{{ mageops_magesuite_domain }}/"     
+
+# > the address set as default shop's email and also used ans the envelope FROM address when sending e-mails
+magento_bounce_email_address: contact@magesuite.io                             
+
+# > use redis as Magento cache backend
+# magento_redis_cache: yes                                                     
+
+# > configure Magento for rabbitmq queue connection
+# magento_rabbitmq_queue: no        
+
+# > enable cosumer workers ran by supervisord
+# magento_consumer_workers_enable: no                                          
 # magento_consumer_workers_max_messages: 500
-# magento_consumer_workers: []                                                  # list of workers to run via supervisor (none by default)
-# magento_consumer_workers:                                                     # list of workers to run via supervisor (example configuration)
-#  - consumer: async.operations.all                                             # config fro async.operations.all worker which process bulk rest API jobs
+
+# > list of workers to run via supervisor (none by default)
+# magento_consumer_workers: []                                                 
+
+# > list of workers to run via supervisor (example configuration)
+# magento_consumer_workers:                                                    
+   # config for async.operations.all worker which process bulk rest API jobs
+#  - consumer: async.operations.all                                            
 #    batch_size: 100
 #    process_count: 1
 
-# magento_api_request_php_memory_limit: "{{ php_http_request_memory_limit }}"   # custom PHP limits for Magento REST API requests
+# > custom PHP limits for Magento REST API requests
+# magento_api_request_php_memory_limit: "{{ php_http_request_memory_limit }}"  
 # magento_api_request_php_max_execution_time: "{{ php_http_request_max_execution_time }}" 
-# magento_admin_request_php_memory_limit: "{{ php_http_request_memory_limit }}" # custom PHP limits for Magento Admin Panel requests
+
+# > custom PHP limits for Magento Admin Panel requests
+# magento_admin_request_php_memory_limit: "{{ php_http_request_memory_limit }}"
 # magento_admin_request_php_max_execution_time: 300
-# magento_cron_request_php_memory_limit: "{{ php_http_request_memory_limit }}"  # custom PHP limits for Magento http cron request trigger
+
+# > custom PHP limits for Magento http cron request trigger
+# magento_cron_request_php_memory_limit: "{{ php_http_request_memory_limit }}" 
 # magento_cron_request_php_max_execution_time: "{{ php_http_request_max_execution_time }}"
 
-magento_media_storage_strategy: aws-efs                                         # how to store and share Magento runtime asset / media files (possible values: aws-s3, aws-efs, local-fs)
+# > how to store and share Magento runtime asset / media files (possible values: aws-s3, aws-efs, local-fs)
+magento_media_storage_strategy: aws-efs                                        
 
 # -----------------------------------------------
 # --------  Magento Installation Config  --------
 # -----------------------------------------------
 
-# magento_currency: EUR                                                         # default currency
-# magento_language: en_US                                                       # default language
+# > default currency
+# magento_currency: EUR        
+
+# > default language
+# magento_language: en_US                                                      
 
 
 # ----------------------------------------
 # --------  Magento Admin Config  --------
 # ----------------------------------------
 
-# magento_admin_path: mgsadmin                                                  # url path used under which the admin panel will be accessible
-# magento_admin_user_username: mgsadmin                                         # default admin username
-# magento_admin_user_email: contact@creativeshop.io                             # default admin user email
+# > url path used under which the admin panel will be accessible
+# magento_admin_path: mgsadmin                                                 
+
+# > default admin username
+# magento_admin_user_username: mgsadmin   
+                                    
+# > default admin user email
+# magento_admin_user_email: contact@creativeshop.io                            
 # magento_admin_user_firstname: MageOps
 # magento_admin_user_lastname: DefaultAdmin
 
@@ -89,7 +135,8 @@ magento_media_storage_strategy: aws-efs                                         
 # --------  Magento / Import  --------
 # ------------------------------------
 
-# magento_import_dispatcher_enable: no                                          # whether to enable MageSuite import dispatcher supervisord worker
+# > whether to enable MageSuite import dispatcher supervisord worker
+# magento_import_dispatcher_enable: no                                         
 
 
 # ------------------------------------
@@ -97,11 +144,17 @@ magento_media_storage_strategy: aws-efs                                         
 # ------------------------------------
 
 
-# magento_post_deploy_commands_custom: []                                       # any custom commands to be executed post-deploy in the app directory
+# > any custom commands to be executed post-deploy in the app directory
+# magento_post_deploy_commands_custom: []                                      
 
-# magento_core_config_settings_extra: []                                        # extra core config settings to be set at deploy (see: group_vars/all.yml)
-# magento_core_config_settings_to_remove_extra: []                              # settings that shall be absent from the core_config db table
-# magento_core_config_enable_redirect_to_base: no                               # predefined core_config settings that can be customized
+# > extra core config settings to be set at deploy (see: group_vars/all.yml)
+# magento_core_config_settings_extra: []                                       
+
+# > settings that shall be absent from the core_config db table
+# magento_core_config_settings_to_remove_extra: []        
+
+# > predefined core_config settings that can be customized
+# magento_core_config_enable_redirect_to_base: no                              
 # magento_core_config_cron_use_separate_process_for_default_group: yes
 # magento_core_config_cron_use_separate_process_for_index_group: yes
 # magento_core_config_cron_use_separate_process_for_yotpo_yotpo_group: no
@@ -110,10 +163,12 @@ magento_media_storage_strategy: aws-efs                                         
 # magento_core_config_cron_use_separate_process_for_ddg_automation_group: no
 
 
-# deploy_rsync_excludes:                                                        # directories to exclude from when uploading artificts to speed it up
+# > directories to exclude from when uploading artificts to speed it up
+# deploy_rsync_excludes:                                                       
 #   - "/vendor/creativestyle/theme-*"
 
-# deploy_shared_dirs_extra: []                                                  # custom directories shared between releases
+# > custom directories shared between releases
+# deploy_shared_dirs_extra: []                                                 
 
 # ---------------------------------
 # --------  Magento / SCD  --------
@@ -131,7 +186,8 @@ magento_media_storage_strategy: aws-efs                                         
 # --------  Magento / Page Cache  --------
 # ----------------------------------------
 
-# magento_page_cache_warmer_enable: no                                          # enable MageSuite Page Cache Warmer worker and default configuration
+# > enable MageSuite Page Cache Warmer worker and default configuration
+# magento_page_cache_warmer_enable: no                                         
 # magento_page_cache_warmer_concurrency: 4
 # magento_page_cache_warmer_target_ttfb: 3
 
@@ -140,21 +196,30 @@ magento_media_storage_strategy: aws-efs                                         
 # --------  Database  --------
 # ----------------------------
 
-# mageops_mysql_create: yes                                                     # setup MySQL (or RDS instance if on AWS) server
-# mageops_mysql_host:                                                           # override MySQL host if you have a preexsting instance you want to use
+# > setup MySQL (or RDS instance if on AWS) server
+# mageops_mysql_create: yes   
+
+# > override MySQL host if you have a preexsting instance you want to use
+# mageops_mysql_host:                                                          
 
 
 # -------------------------
 # --------  Redis  --------
 # -------------------------
 
-# mageops_redis_create: yes                                                     # setup redis used for Magento cache
-# mageops_redis_host: ~                                                         # override redis host if you have a preexsting instance you want to use
-# mageops_redis_sessions_port: 6379                                             # override redis port
+# > setup redis used for Magento cache
+# mageops_redis_create: yes                                                    
+
+# > override redis host if you have a preexsting instance you want to use
+# mageops_redis_host: ~       
+
+# > override redis port
+# mageops_redis_sessions_port: 6379                                            
 # redis_maxmemory_policy: allkeys-lru
 # redis_maxmemory: 200M  
 
-# mageops_redis_sessions_create: "{{ mageops_redis_create }}"                   # setup redis for session storage 
+# > setup redis for session storage 
+# mageops_redis_sessions_create: "{{ mageops_redis_create }}"                  
 # mageops_redis_sessions_host:                                        
 # mageops_redis_sessions_port: 6380  
 # redis_sessions_maxmemory_policy: noeviction
@@ -165,22 +230,33 @@ magento_media_storage_strategy: aws-efs                                         
 # ----------------------------
 
 
-# mageops_rabbitmq_create: "{{ magento_rabbitmq_queue }}"                       # setup RabbitMQ
-# mageops_rabbitmq_host: ~                                                      # override RabbitMQ host if you have a preexsting instance you want to use
+# > setup RabbitMQ
+# mageops_rabbitmq_create: "{{ magento_rabbitmq_queue }}"                      
+
+# > override RabbitMQ host if you have a preexsting instance you want to use
+# mageops_rabbitmq_host: ~                                                     
 # rabbitmq_amqp_port: 5672
 # rabbitmq_http_port: 15672
-# rabbitmq_highmem_relative: 0.3                                                # Sets RabbitMQ vm_memory_high_watermark.relative option (loosely: relative memory limit)
+
+# > Sets RabbitMQ vm_memory_high_watermark.relative option (loosely: relative memory limit)
+# rabbitmq_highmem_relative: 0.3                                               
 
 
 # ---------------------------------
 # --------  Elasticsearch  --------
 # ---------------------------------
 
-# mageops_elasticsearch_create: yes                                             # set up elasticsearch
-# mageops_elasticsearch_host:                                                   # override elasticsearch host if you have a preexsting instance you want to use
+# > set up elasticsearch
+# mageops_elasticsearch_create: yes        
+
+# > override elasticsearch host if you have a preexsting instance you want to use
+
+# mageops_elasticsearch_host:                                                  
 # elasticsearch_http_port: 9200
 # elasticsearch_transport_tcp_port: 9300
-# elasticsearch_heap_size: "{{ ((ansible_memtotal_mb / 2) | int ) ~ 'm' }}"     # half of total instance memory by default
+
+# > half of total instance memory by default
+# elasticsearch_heap_size: "{{ ((ansible_memtotal_mb / 2) | int ) ~ 'm' }}"    
 # elasticsearch_plugins:
 #    - analysis-icu
 #    - analysis-phonetic
@@ -190,43 +266,75 @@ magento_media_storage_strategy: aws-efs                                         
 # --------  Varnish  --------
 # ---------------------------
 
-# varnish_standalone: yes                                                       # place varnish on a separate instance instead of each app node
-# varnish_as_loadbalancer: "{{ varnish_standalone and mageops_https_termination_enable }}"  # use the separate varnish instance as a load-balancer
+# > place varnish on a separate instance instead of each app node
+# varnish_standalone: yes     
+
+# > use the separate varnish instance as a load-balancer
+# varnish_as_loadbalancer: "{{ varnish_standalone and mageops_https_termination_enable }}" 
 # varnish_memory: 128M
 
-# varnish_error_page_color_primary: '#35ABDF'                                   # customize error pages served directly from varnish when backends are not accesible
+# > customize error pages served directly from varnish when backends are not accesible
+# varnish_error_page_color_primary: '#35ABDF'                                   
 
-# varnish_throttling: no                                                        # enable varnish-level request throttling (rate-limiting) mechanism
-# varnish_throttling_rules: []                                                  # varnish throttling rules (see cs.varnish role default for specifics)
+# > enable varnish-level request throttling (rate-limiting) mechanism
+# varnish_throttling: no   
+
+# > varnish throttling rules (see cs.varnish role default for specifics)
+# varnish_throttling_rules: []                                                 
 
 
 # -------------------------
 # --------  nginx  --------
 # -------------------------
 
-# nginx_magento_run_type: no                                                    # enable Magento host-based multi-website routing (use 'website' or 'store')
-# nginx_mage_run_code_map: {}                                                   # mapping hostname => store/website code.
-# nginx_mage_default_run_code: ~                                                # which code to use when no host matches
+# > enable Magento host-based multi-website routing (use 'website' or 'store')
+# nginx_magento_run_type: no             
 
-# nginx_magento_vhost_template_custom: ~                                        # override default vhost template with custom one - path relative to `templates/` subdir [advanced!]
-# nginx_magento_fastci_params_extra: ~                                          # extra contents to add to nginx fcgi backend params config [advanced!]
+# > mapping hostname => store/website code.
+# nginx_mage_run_code_map: {}                                                  
 
-# nginx_custom_php_scripts_path_pattern: no                                     # nginx path match pattern for extra php scripts that shall be executable via http request (whitelist)
-# nginx_blacklist_urls_project: []                                              # project-specific URL path patterns to blacklist
-# nginx_blacklist_urls_response_code: 410                                       # response code for blacklisted URLs
+# > which code to use when no host matches
+# nginx_mage_default_run_code: ~                                               
+
+# > override default vhost template with custom one - path relative to `templates/` subdir [advanced!]
+# nginx_magento_vhost_template_custom: ~                                       
+
+# > extra contents to add to nginx fcgi backend params config [advanced!]
+# nginx_magento_fastci_params_extra: ~                                         
+
+# > nginx path match pattern for extra php scripts that shall be executable via http request (whitelist)
+# nginx_custom_php_scripts_path_pattern: no                                    
+
+# > project-specific URL path patterns to blacklist
+# nginx_blacklist_urls_project: []                                             
+
+# > response code for blacklisted URLs
+# nginx_blacklist_urls_response_code: 410                                      
 
 # -----------------------
 # --------  PHP  --------
 # -----------------------
 
-php_version: '7.2'                                                              # php version to install
-# php_extra_packages: []                                                        # any extra php RPM packages to install
-# php_fpm_pm_max_children: 4                                                    # count of PHP-FPM pool children processes
+# > php version to install
+php_version: '7.2'         
+                                                    
+# > any extra php RPM packages to install
+# php_extra_packages: []    
 
-# php_http_request_memory_limit: "256M"                                         # PHP memory limit for requests coming through FCGI
-# php_http_request_max_execution_time: "60"                                     # PHP execution time limit for requests coming through FCGI
-# php_http_request_limits_custom: []                                            # customizable (by request path pattern) PHP memory limits (default)
-# php_http_request_limits_custom:                                               # customizable (by request path pattern) PHP memory limits (example)
+# > count of PHP-FPM pool children processes
+# php_fpm_pm_max_children: 4                                                   
+
+# > PHP memory limit for requests coming through FCGI
+# php_http_request_memory_limit: "256M"                                        
+
+# > PHP execution time limit for requests coming through FCGI
+# php_http_request_max_execution_time: "60"                                    
+
+# > customizable (by request path pattern) PHP memory limits (default)
+# php_http_request_limits_custom: []                                           
+
+# > customizable (by request path pattern) PHP memory limits (example)
+# php_http_request_limits_custom:                                              
 #     - name: "Cleverreach scripts execute longer, so give 'em time"
 #       path_pattern: '^/cleverreach/.*$'
 #       memory_limit: 512M
@@ -237,7 +345,8 @@ php_version: '7.2'                                                              
 # --------  HTTPS Termination / Varnish Loadbalancer  --------
 # ------------------------------------------------------------
 
-# mageops_https_termination_enable: "{{ mageops_https_enable }}"                # enable HTTPS termination using nginx
+# > enable HTTPS termination using nginx
+# mageops_https_termination_enable: "{{ mageops_https_enable }}"               
 
 ## CAUTION: Letsencrypt certificates are renewed during deploy / provisioning only.
 ## This is for historical reasons, business requirements and may change in
@@ -247,9 +356,11 @@ https_termination_hosts:
     server_name: "{{ mageops_magesuite_domain }}"
     letsencrypt: yes
     aliases: []
-  # - name: custom                                                              # optionally use custom certificates placed in `certs/`
+    # > optionally use custom certificates placed in `certs/`
+  # - name: custom                                                             
   #   server_name: "{{ mageops_magesuite_domain }}"
-  #   cert_path: custom.cer                                                     # cert paths are relative to `certs/` subdir
+      # > cert paths are relative to `certs/` subdir
+  #   cert_path: custom.cer                                                    
   #   cert_key_path: custom.key
   #   cert_chain_path: intermediate.cer
   #   aliases: []
@@ -258,9 +369,14 @@ https_termination_hosts:
 # --------  Environment Access Whitelist  --------
 # ------------------------------------------------
 
-# mageops_root_ssh_keys_project: []                                             # ssh public keys (contents, not paths!) to whitelist for access as root
-# mageops_app_ssh_keys_project: []                                              # ssh public keys (contents, not paths!) to whitelist for access as app user (magento) - already includes root keys
-# mageops_trusted_cidr_blocks_extra: []                                         # extra IPs to whitelist for access (ssh access, bypass basic auth, ...)
+# > ssh public keys (contents, not paths!) to whitelist for access as root
+# mageops_root_ssh_keys_project: [] 
+
+# > ssh public keys (contents, not paths!) to whitelist for access as app user (magento) - already includes root keys
+# mageops_app_ssh_keys_project: []                                             
+
+# > extra IPs to whitelist for access (ssh access, bypass basic auth, ...)
+# mageops_trusted_cidr_blocks_extra: []                                        
 
 
 

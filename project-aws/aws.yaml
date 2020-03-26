@@ -12,8 +12,11 @@
 aws_use: yes
 aws_region: eu-central-1
 
-# aws_preferred_availability_zone:                                              # optional - selected automatically (the first zone in region)
-aws_account_id:                                                                 # required
+# > optional - selected automatically (the first zone in region)
+# aws_preferred_availability_zone:    
+
+# > required
+aws_account_id:                                                                
 
 
 # -----------------------
@@ -22,13 +25,16 @@ aws_account_id:                                                                 
 
 # aws_vpc_name: "{{ mageops_app_name }}"
 # aws_vpc_routes_extra: []
-aws_vpc_subnet_prefix:                                                          # required - first two elements of subnet as dot-separated numbers - e.g. '192.168'
+
+# > required - first two elements of subnet as dot-separated numbers - e.g. '192.168'
+aws_vpc_subnet_prefix:                                                         
 
 # -----------------------
 # --------  EC2  --------
 # -----------------------
 
-# aws_ec2_ssh_key_name: "{{ mageops_app_name }}"                                # name of the manually created AWS EC2 SSH key                                     
+# > name of the manually created AWS EC2 SSH key                                     
+# aws_ec2_ssh_key_name: "{{ mageops_app_name }}"                               
 
 
 # ----------------------------------
@@ -45,9 +51,12 @@ aws_vpc_subnet_prefix:                                                          
 
 # aws_persistent_node_create: yes
 # aws_persistent_node_instance_type: t3a.micro 
-# aws_persistent_node_ebs_volume_size: 10                                       # volume size in GB
 
-# aws_persistent_node_elastic_ip: ~                                             # if set then the chosen EIP will be assigned (it has to already exist!)
+# > volume size in GB
+# aws_persistent_node_ebs_volume_size: 10                                      
+
+# > if set then the chosen EIP will be assigned (it has to already exist!)
+# aws_persistent_node_elastic_ip: ~                                            
 
 
 # ---------------------------------------------------
@@ -55,8 +64,12 @@ aws_vpc_subnet_prefix:                                                          
 # ---------------------------------------------------
 
 # aws_varnish_node_instance_type: t3a.micro
-# aws_varnish_node_ebs_volume_size: 10                                          # volume size in GB
-# aws_varnish_node_elastic_ip: ~                                                # if set then the chosen EIP will be assigned (it has to already exist!)
+
+# > volume size in GB
+# aws_varnish_node_ebs_volume_size: 10                                         
+
+# > if set then the chosen EIP will be assigned (it has to already exist!)
+# aws_varnish_node_elastic_ip: ~                                               
 
 
 # -----------------------
@@ -78,13 +91,15 @@ aws_vpc_subnet_prefix:                                                          
 # aws_app_asg_desired_capacity: '1'
 # aws_app_asg_load_balancers: []
 
-# aws_extra_app_asg_enable: no                                                  # enable extra app instances ASG
+# > enable extra app instances ASG
+# aws_extra_app_asg_enable: no                                                 
 # aws_extra_app_asg_min_size: 0
 # aws_extra_app_asg_max_size: 1
 # aws_extra_app_asg_desired_capacity: 0
 # aws_extra_app_asg_cooldown: 60
 
-# aws_extra_app_asg_passthrough_url_pattern:                                    # regexp patterns for extra app instance passhtrough
+# > regexp patterns for extra app instance passhtrough
+# aws_extra_app_asg_passthrough_url_pattern:                                   
 # aws_extra_app_asg_passthrough_uagent_pattern:
 # aws_extra_app_asg_passthrough_ip_pattern:
 
@@ -136,4 +151,5 @@ aws_vpc_subnet_prefix:                                                          
 # --------  IAM  --------
 # -----------------------
 
-# aws_iam_name_prefix: MageOps                                                  # you shall almost never change it ;)
+# > you shall almost never change it ;)
+# aws_iam_name_prefix: MageOps                                                 
