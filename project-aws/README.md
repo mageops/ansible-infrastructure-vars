@@ -1,0 +1,1 @@
+# Basic configuration example for Magento/MageSuite project hosted on AWS

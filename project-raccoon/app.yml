@@ -1,0 +1,53 @@
+# -------  Project Basic Config -------
+
+mageops_project: magento
+mageops_environment: raccoon
+
+mageops_app_is_magesuite: yes
+mageops_magesuite_domain: "magesuite.me"
+
+# Universal passwords used for everything for convenience
+mageops_raccoon_password: rc0n
+
+# -------  Magento Infrastructure Config  -------
+
+magento_base_url: "http://{{ mageops_magesuite_domain }}/"
+magento_bounce_email_address: raccoon@mageops.sh
+
+# -------  Magento Installation Config  -------
+
+magento_currency: EUR
+magento_language: en_US
+
+# -------  Magento Admin Config  -------
+
+magento_admin_path: admin
+magento_admin_user_username: admin
+magento_admin_user_email: admin@magesuite.me
+magento_admin_user_firstname: Creativecoon
+magento_admin_user_lastname: Stylera
+
+# -------  Magento / Import -------
+
+# Whether to enable the custom MageSuite import dispatcher service
+magento_import_dispatcher_enable: no
+
+# -------  Magento / SCD  -------
+
+magento_scd_strategy: quick
+magento_scd_parallel_jobs: 1
+
+# No need to waste time compiling Luma when you use custom themes
+magento_scd_excluded_themes:
+  - "Magento/luma"
+
+magento_scd_languages:
+  - "en_US"
+  - "de_DE"
+
+# -------  Optional services  -------
+
+# Whether install RabbitMQ and configure Magento to use it
+# > Note: New Magento version automatically fall-back to database
+# > queue implementations if RabbitMQ is not configured.
+magento_rabbitmq_queue: no
