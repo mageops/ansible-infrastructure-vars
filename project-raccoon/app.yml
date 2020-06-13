@@ -1,6 +1,6 @@
 # -------  Project Basic Config -------
 
-mageops_project: magento
+mageops_project: app
 mageops_environment: raccoon
 
 mageops_app_is_magesuite: yes
