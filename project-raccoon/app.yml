@@ -6,8 +6,9 @@ mageops_environment: raccoon
 mageops_app_is_magesuite: yes
 mageops_magesuite_domain: "magesuite.me"
 
-# Universal passwords used for everything for convenience
-mageops_raccoon_password: rc0n
+# Universal credentials used wherever possible
+mageops_raccoon_app_id: "{{ mageops_project | lower | regex_replace('[^a-z0-9]+', '_') | truncate(10, true, '') }}"
+mageops_raccoon_password: racc00n
 
 # -------  Magento Infrastructure Config  -------
 
