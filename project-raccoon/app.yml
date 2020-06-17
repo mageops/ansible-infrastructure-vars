@@ -12,13 +12,24 @@ mageops_raccoon_password: racc00n
 
 # -------  Magento Infrastructure Config  -------
 
-magento_base_url: "http://{{ mageops_magesuite_domain }}/"
+# Do not set a fixed base URL allowing access from any host
+magento_base_url: ~
 magento_bounce_email_address: raccoon@mageops.sh
 
 # -------  Magento Installation Config  -------
 
 magento_currency: EUR
 magento_language: en_US
+
+# -------  Magento Core Config  -------
+
+# Disable redirect to base so shop can be accessed by IP / without domain
+magento_core_config_enable_redirect_to_base: 0
+
+# Remove base-urls for the aboe purpose
+magento_core_config_settings_to_remove_extra:
+  - web/unsecure/base_url
+  - web/secure/base_url
 
 # -------  Magento Admin Config  -------
 
