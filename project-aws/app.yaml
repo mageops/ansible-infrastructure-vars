@@ -316,7 +316,7 @@ magento_media_storage_strategy: aws-efs
 # -----------------------
 
 # > php version to install
-php_version: '7.2'         
+php_version: '7.4'         
                                                     
 # > any extra php RPM packages to install
 # php_extra_packages: []    
